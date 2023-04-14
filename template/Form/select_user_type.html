@@ -1,0 +1,12 @@
+{% extends 'base.html'%} {% block 'content' %}{%load crispy_forms_tags%}
+    <div class="contaner">
+        <div class="row">
+            <div class="col-8 mx-auto">
+                <h1 class="display-3 bg-info">Welcom in multi loging system in django.</h1>
+                <a href="{%url 'admin_singup'%}" class="btn btn-success p-3 fs-3">Admin singup</a>
+                <a href="{%url 'private_singup'%}" class="btn btn-primary p-3 fs-3">Private singup</a>
+                <a href="{%url 'public_singup'%}" class="btn btn-danger p-3 fs-3">Public singup</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
