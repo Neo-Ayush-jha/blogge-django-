@@ -15,5 +15,7 @@ urlpatterns = [
     path("login/",LoginView.as_view(),name="login"),
     path("logout/",LinOut.as_view(),name="logout"),
     path("create/category/",categoryView,name="category"),
+    path("/single/post/<int:id>/",singleView,name="singleView"),
+    path("search/post/",search,name="search")
 ]
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

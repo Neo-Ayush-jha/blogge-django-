@@ -1,8 +1,9 @@
-from django.shortcuts import render,redirect,HttpResponse
+from django.shortcuts import render,redirect,HttpResponse,get_object_or_404
 from django.views.generic import CreateView,View,ListView,FormView
 from .models import *
 from .forms import *
 from .decorators import *
+from django.db.models import Q
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
@@ -10,12 +11,13 @@ from django.contrib.auth import authenticate,login,logout
 from django.utils.decorators import method_decorator
 
 class HomeView(View):
+    model=Post
     def get(self,req):
         data={
             "post":Post.objects.all(),
-            "categorys":Category.objects.all(),
+            "category":Category.objects.all(),
         }
-        return render(req,"home.html",data)
+        return render(req,"home.html",data)   
 
 class SingUp(View):
     def get(self,req):
@@ -65,7 +67,6 @@ class insertPostAsPrivate(CreateView):
     fields="__all__"
     def post(self,req):
         pass
-
 
 class LoginView(FormView):
     template_name="Form/login.html"
@@ -117,3 +118,23 @@ def categoryView(req):
             return redirect(postCreate)
     return render(req,"Form/category.html",{"form":form})
         
+# class SinglePostView(CreateView):
+#     template_name="singleView.html"
+#     success_url="/login/"
+def singleView(req,id):
+    singlePost=get_object_or_404(Post,pk=id)
+    data={
+        "category":Category.objects.all(),
+        "post":singlePost,
+        "realted_post":Post.objects.filter(~Q(pk=id)& Q(category__id=singlePost.category.id)),
+    }
+    return render(req,"singleView.html",data)
+
+
+def search(req):
+        search_data= req.GET.get("search","")
+        data={
+            "post":Post.objects.filter(title__icontains=search_data),
+            "category":Category.objects.all(),   
+        }
+        return render(req,"home.html",data)

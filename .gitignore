@@ -1,0 +1,6 @@
+/db.sqlite3*
+/manage.py*
+/bloogger/migrations*
+/bloogger/__pycache__*
+/media*
+/myBlogge/__pycache__*
