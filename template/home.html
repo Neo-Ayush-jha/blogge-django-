@@ -18,7 +18,7 @@
                 <div class="col-xl-4 col-sm-4 my-3 mx-auto">
                     <a href="{%url 'singleView' po.id%}" class="btn btn-primary">
                     <div class="card" >
-                        <img src="{{po.image.url}}" class="card-img-top" height="250px" alt="...">
+                        <img src="{{po.image.url}}" class="card-img-top" height="250px" width="250px" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">{{po.title|truncatechars:20}}</h5>
                                 <p class="card-text fw-light">Category: {{po.category.cat_title|truncatechars:8}} <br> <span> Author : {{po.author}}</span></p>
